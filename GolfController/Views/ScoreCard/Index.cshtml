@@ -1,0 +1,57 @@
+﻿@model IEnumerable<GolfController.Models.ScoreCard>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            Score
+        </th>
+        <th>
+            Putts
+        </th>
+        <th>
+            FairwayInRegulation
+        </th>
+        <th>
+            GreenInRegulation
+        </th>
+        <th>
+            hole
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Score)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Putts)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FairwayInRegulation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GreenInRegulation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hole.HoleNumber)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

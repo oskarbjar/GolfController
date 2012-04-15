@@ -1,0 +1,43 @@
+﻿@model GolfController.Models.Hole
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Hole</legend>
+
+    <div class="display-label">HoleNumber</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoleNumber)
+    </div>
+
+    <div class="display-label">Length</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Length)
+    </div>
+
+    <div class="display-label">Par</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Par)
+    </div>
+
+    <div class="display-label">Description</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">course</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.course.Name)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

@@ -1,0 +1,40 @@
+﻿@model GolfController.Models.Hole
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Hole</legend>
+
+    <div class="display-label">HoleNumber</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoleNumber)
+    </div>
+
+    <div class="display-label">Length</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Length)
+    </div>
+
+    <div class="display-label">Par</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Par)
+    </div>
+
+    <div class="display-label">Description</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">course</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.course.Name)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

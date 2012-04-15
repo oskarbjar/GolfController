@@ -1,0 +1,7 @@
+C:\Programming Projects\GolfController\GolfController\bin\GolfController.dll
+C:\Programming Projects\GolfController\GolfController\bin\GolfController.pdb
+C:\Programming Projects\GolfController\GolfController\bin\EntityFramework.dll
+C:\Programming Projects\GolfController\GolfController\bin\EntityFramework.xml
+C:\Programming Projects\GolfController\GolfController\obj\Debug\ResolveAssemblyReference.cache
+C:\Programming Projects\GolfController\GolfController\obj\Debug\GolfController.dll
+C:\Programming Projects\GolfController\GolfController\obj\Debug\GolfController.pdb

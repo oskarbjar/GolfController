@@ -1,0 +1,40 @@
+﻿@model GolfController.Models.ScoreCard
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ScoreCard</legend>
+
+    <div class="display-label">Score</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Score)
+    </div>
+
+    <div class="display-label">Putts</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Putts)
+    </div>
+
+    <div class="display-label">FairwayInRegulation</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FairwayInRegulation)
+    </div>
+
+    <div class="display-label">GreenInRegulation</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GreenInRegulation)
+    </div>
+
+    <div class="display-label">hole</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.hole.HoleNumber)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
