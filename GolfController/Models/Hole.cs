@@ -23,7 +23,7 @@ namespace GolfController.Models
         public int Length { get; set; }
         public int Par { get; set; }            
         public int CourseID { get; set; }
-       // public decimal AvgScore { get; set; }
+        public decimal AvgScore { get; set; }
 
         public Course course { get; set; }
     }
