@@ -20,11 +20,7 @@ namespace GolfController.Controllers
         {
             
             
-            var totalLengthController = (from item in db.hole 
-                              where item.CourseID == 1
-                              select item.Par).Sum();
-
-               Course.Foo = totalLengthController;
+           
             return View(db.course.ToList());
         }
 
