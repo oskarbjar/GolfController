@@ -9,6 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
 <table>
     <tr>
         <th>
@@ -32,12 +33,14 @@
             @Html.DisplayFor(modelItem => item.NumberOfHoles)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Foo)
+            @Html.DisplayFor(modelItem => item.TotalPar)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })  |
+            @Html.ActionLink("View Holes", "ViewHoles" , "Hole", new { id=item.ID } , null ) 
+
         </td>
     </tr>
 }

@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<GolfController.Models.Hole>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ViewHoles";
 }
 
-<h2>Index</h2>
+<h2>ViewHoles</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -21,10 +21,10 @@
             Par
         </th>
         <th>
-            Description
+            CourseID
         </th>
         <th>
-            course
+            AvgScore
         </th>
         <th></th>
     </tr>
@@ -40,9 +40,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.Par)
         </td>
-     
         <td>
-            @Html.DisplayFor(modelItem => item.course.Name)
+            @Html.DisplayFor(modelItem => item.CourseID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvgScore)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

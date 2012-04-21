@@ -23,9 +23,15 @@ namespace GolfController.Controllers
             return View(hole.ToList());
         }
 
+        public ViewResult ViewHoles(int id)
+        {
+            var hole = db.hole.Where(m => m.CourseID == id);
+                return View ( hole.ToList());
+        }
+
         //
         // GET: /Hole/Details/5
-
+        // .ETTA ER TJEKK INN TIL AÐ TESTA 
         public ViewResult Details(int id)
         {
             Hole hole = db.hole.Find(id);
@@ -49,13 +55,24 @@ namespace GolfController.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.hole.Add(hole);
+                db.hole.Add(hole);              
                 db.SaveChanges();
-                return RedirectToAction("Index");  
+                CalculatePar(hole);
+                return RedirectToAction("ViewHoles", new { id = hole.CourseID });  
             }
 
             ViewBag.CourseID = new SelectList(db.course, "ID", "Name", hole.CourseID);
             return View(hole);
+        }
+        
+        private void CalculatePar(Hole hole)
+        {
+            var totalLengthController = (from item in db.hole
+                                         where item.CourseID == hole.CourseID
+                                         select item.Par).Sum();
+            var course = db.course.Find(hole.CourseID);
+            course.TotalPar = totalLengthController;
+            db.SaveChanges();
         }
         
         //
@@ -78,6 +95,7 @@ namespace GolfController.Controllers
             {
                 db.Entry(hole).State = EntityState.Modified;
                 db.SaveChanges();
+                CalculatePar(hole);
                 return RedirectToAction("Index");
             }
             ViewBag.CourseID = new SelectList(db.course, "ID", "Name", hole.CourseID);
@@ -102,6 +120,7 @@ namespace GolfController.Controllers
             Hole hole = db.hole.Find(id);
             db.hole.Remove(hole);
             db.SaveChanges();
+            CalculatePar(hole);
             return RedirectToAction("Index");
         }
 
