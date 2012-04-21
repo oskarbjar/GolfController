@@ -48,13 +48,24 @@ namespace GolfController.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.hole.Add(hole);
+                db.hole.Add(hole);              
                 db.SaveChanges();
+                CalculatePar(hole);
                 return RedirectToAction("Index");  
             }
 
             ViewBag.CourseID = new SelectList(db.course, "ID", "Name", hole.CourseID);
             return View(hole);
+        }
+        
+        private void CalculatePar(Hole hole)
+        {
+            var totalLengthController = (from item in db.hole
+                                         where item.CourseID == hole.CourseID
+                                         select item.Par).Sum();
+            var course = db.course.Find(hole.CourseID);
+            course.TotalPar = totalLengthController;
+            db.SaveChanges();
         }
         
         //
@@ -77,6 +88,7 @@ namespace GolfController.Controllers
             {
                 db.Entry(hole).State = EntityState.Modified;
                 db.SaveChanges();
+                CalculatePar(hole);
                 return RedirectToAction("Index");
             }
             ViewBag.CourseID = new SelectList(db.course, "ID", "Name", hole.CourseID);
@@ -101,6 +113,7 @@ namespace GolfController.Controllers
             Hole hole = db.hole.Find(id);
             db.hole.Remove(hole);
             db.SaveChanges();
+            CalculatePar(hole);
             return RedirectToAction("Index");
         }
 

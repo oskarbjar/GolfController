@@ -9,16 +9,17 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
 <table>
     <tr>
         <th>
             Name
         </th>
         <th>
-            NumberOfHoles
+            Number Of Holes
         </th>
         <th>
-            TotalLength
+         Par = Foo
         </th>
         <th></th>
     </tr>
@@ -32,7 +33,7 @@
             @Html.DisplayFor(modelItem => item.NumberOfHoles)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TotalLength)
+            @Html.DisplayFor(modelItem => item.TotalPar)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
