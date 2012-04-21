@@ -11,6 +11,7 @@ namespace GolfController.Controllers
 { 
     public class HoleController : Controller
     {
+        //holecontext
         private HoleContext db = new HoleContext();
 
         //
