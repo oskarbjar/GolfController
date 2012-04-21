@@ -22,6 +22,12 @@ namespace GolfController.Controllers
             return View(hole.ToList());
         }
 
+        public ViewResult ViewHoles(int id)
+        {
+            var hole = db.hole.Where(m => m.CourseID == id);
+                return View ( hole.ToList());
+        }
+
         //
         // GET: /Hole/Details/5
 
@@ -51,7 +57,7 @@ namespace GolfController.Controllers
                 db.hole.Add(hole);              
                 db.SaveChanges();
                 CalculatePar(hole);
-                return RedirectToAction("Index");  
+                return RedirectToAction("ViewHoles", new { id = hole.CourseID });  
             }
 
             ViewBag.CourseID = new SelectList(db.course, "ID", "Name", hole.CourseID);

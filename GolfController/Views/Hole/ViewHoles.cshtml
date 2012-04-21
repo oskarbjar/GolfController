@@ -1,0 +1,57 @@
+﻿@model IEnumerable<GolfController.Models.Hole>
+
+@{
+    ViewBag.Title = "ViewHoles";
+}
+
+<h2>ViewHoles</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            HoleNumber
+        </th>
+        <th>
+            Length
+        </th>
+        <th>
+            Par
+        </th>
+        <th>
+            CourseID
+        </th>
+        <th>
+            AvgScore
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoleNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Length)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Par)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.course.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvgScore)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
