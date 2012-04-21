@@ -12,7 +12,6 @@ namespace GolfController.Models
         public int  NumberOfHoles { get; set; }
         public int TotalLength { get; set; }
         public  int TotalPar { get; set; }
-        public int MyProperty { get; set; }
         public virtual ICollection<Hole> holes { get; set; }
 
 
