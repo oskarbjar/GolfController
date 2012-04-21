@@ -30,7 +30,7 @@ namespace GolfController.Controllers
 
         //
         // GET: /Hole/Details/5
-        // .ETTA ER TJEKK INN TIL AÐ TESTA 
+      
         public ViewResult Details(int id)
         {
             Hole hole = db.hole.Find(id);
