@@ -24,11 +24,11 @@ namespace GolfController.Controllers
 
         public ViewResult ViewHoles(int id)
         {
-            var hole = db.hole.Where(m => m.CourseID == id);
+            var hole = db.hole.OrderBy(m=> m.HoleNumber).Where(m => m.CourseID == id);
                 return View ( hole.ToList());
         }
 
-        //
+        //jjjjjj
         // GET: /Hole/Details/5
         // .ETTA ER TJEKK INN TIL AÐ TESTA 
         public ViewResult Details(int id)
@@ -95,7 +95,7 @@ namespace GolfController.Controllers
                 db.Entry(hole).State = EntityState.Modified;
                 db.SaveChanges();
                 CalculatePar(hole);
-                return RedirectToAction("Index");
+                return RedirectToAction("ViewHoles", new { id = hole.CourseID });
             }
             ViewBag.CourseID = new SelectList(db.course, "ID", "Name", hole.CourseID);
             return View(hole);
@@ -120,7 +120,7 @@ namespace GolfController.Controllers
             db.hole.Remove(hole);
             db.SaveChanges();
             CalculatePar(hole);
-            return RedirectToAction("Index");
+            return RedirectToAction("ViewHoles", new { id = hole.CourseID });
         }
 
         protected override void Dispose(bool disposing)
