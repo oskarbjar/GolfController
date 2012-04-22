@@ -29,7 +29,7 @@ namespace GolfController.Controllers
                 return View ( hole.ToList());
         }
 
-        //
+        //jjjjjj
         // GET: /Hole/Details/5
       
         public ViewResult Details(int id)
