@@ -28,9 +28,8 @@ namespace GolfController.Controllers
                 return View ( hole.ToList());
         }
 
-        //jjjjjj
+       
         // GET: /Hole/Details/5
-        // .ETTA ER TJEKK INN TIL AÐ TESTA 
         public ViewResult Details(int id)
         {
             Hole hole = db.hole.Find(id);
@@ -57,6 +56,7 @@ namespace GolfController.Controllers
                 db.hole.Add(hole);              
                 db.SaveChanges();
                 CalculatePar(hole);
+                CalculateLength(hole);
                 return RedirectToAction("ViewHoles", new { id = hole.CourseID });  
             }
 
@@ -66,12 +66,23 @@ namespace GolfController.Controllers
         
         private void CalculatePar(Hole hole)
         {
-            var totalLengthController = (from item in db.hole
+            var totalPar = (from item in db.hole
                                          where item.CourseID == hole.CourseID
                                          select item.Par).Sum();
             var course = db.course.Find(hole.CourseID);
-            course.TotalPar = totalLengthController;
+            course.TotalPar = totalPar;
             db.SaveChanges();
+        }
+
+        private void CalculateLength(Hole hole)
+        {
+            var totalLength = (from item in db.hole
+                            where item.CourseID == hole.CourseID
+                            select item.Length).Sum();
+            var course = db.course.Find(hole.CourseID);
+            course.TotalLength = totalLength;
+            db.SaveChanges();
+
         }
         
         //
@@ -95,6 +106,7 @@ namespace GolfController.Controllers
                 db.Entry(hole).State = EntityState.Modified;
                 db.SaveChanges();
                 CalculatePar(hole);
+                CalculateLength(hole);
                 return RedirectToAction("ViewHoles", new { id = hole.CourseID });
             }
             ViewBag.CourseID = new SelectList(db.course, "ID", "Name", hole.CourseID);

@@ -40,8 +40,10 @@ namespace GolfController.Models
         public string Notes { get; set; }
 
         public Hole hole { get; set; }
+    }
 
-
+    public class User
+    {
 
     }
 }
