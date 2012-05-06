@@ -23,8 +23,7 @@ namespace GolfController.Models
         public string HoleNumber { get; set; }
         public int Length { get; set; }
         public int Par { get; set; }            
-        public int CourseID { get; set; }
-        public decimal AvgScore { get; set; }
+        public int CourseID { get; set; }       
 
         public Course course { get; set; }
     }
@@ -37,7 +36,8 @@ namespace GolfController.Models
         public bool FairwayInRegulation { get; set; }
         public bool GreenInRegulation { get; set; }
         public int HoleID { get; set; }
-        public string Notes { get; set; }
+        public int CourseID { get; set; }
+       // public string Notes { get; set; }
 
         public Hole hole { get; set; }
     }
