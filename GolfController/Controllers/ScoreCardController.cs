@@ -16,9 +16,10 @@ namespace GolfController.Controllers
         //
         // GET: /ScoreCard/
 
-        public ViewResult Index()
+        public ViewResult Index(int id)
         {
-            var scorecard = db.scorecard.Include(s => s.hole);
+            //var scorecard = db.scorecard.Include(s => s.hole).Where(h => h.HoleID == id );
+            var scorecard = db.scorecard.Where(h => h.HoleID == id);
             return View(scorecard.ToList());
         }
 
@@ -33,10 +34,16 @@ namespace GolfController.Controllers
 
         //
         // GET: /ScoreCard/Create
-
-        public ActionResult Create()
+        [HttpGet]
+        public ActionResult Create(int id)
         {
-            ViewBag.HoleID = new SelectList(db.hole, "ID", "HoleNumber");
+            ViewBag.HoleID = new SelectList(db.hole, "ID", "HoleNumber", id);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Create");
+            }
+            ViewBag.HoleID = new SelectList(db.hole, "ID", "HoleNumber", id);
+          
             return View();
         } 
 
@@ -48,8 +55,14 @@ namespace GolfController.Controllers
         {
             if (ModelState.IsValid)
             {
+           
                 db.scorecard.Add(scorecard);
                 db.SaveChanges();
+                if (Request.IsAjaxRequest())
+                {
+              
+                    return PartialView("_ThanksForFeedback");
+                }
                 return RedirectToAction("Index");  
             }
 

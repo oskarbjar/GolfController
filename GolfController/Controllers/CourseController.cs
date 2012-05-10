@@ -18,10 +18,8 @@ namespace GolfController.Controllers
 
         public ViewResult Index()
         {
-            
-            
            
-            return View(db.course.ToList());
+          return View(db.course.ToList());
         }
 
         //
