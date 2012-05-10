@@ -58,9 +58,10 @@ namespace GolfController.Controllers
            
                 db.scorecard.Add(scorecard);
                 db.SaveChanges();
+                CalculateAverageScore(scorecard.HoleID); 
                 if (Request.IsAjaxRequest())
                 {
-              
+                    CalculateAverageScore(scorecard.HoleID);
                     return PartialView("_ThanksForFeedback");
                 }
                 return RedirectToAction("Index");  
@@ -89,7 +90,9 @@ namespace GolfController.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(scorecard).State = EntityState.Modified;
+                
                 db.SaveChanges();
+                CalculateAverageScore(scorecard.HoleID); 
                 return RedirectToAction("Index");
             }
             ViewBag.HoleID = new SelectList(db.hole, "ID", "HoleNumber", scorecard.HoleID);
@@ -114,13 +117,35 @@ namespace GolfController.Controllers
             ScoreCard scorecard = db.scorecard.Find(id);
             db.scorecard.Remove(scorecard);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            CalculateAverageScore(scorecard.HoleID);
+            return RedirectToAction("Index", new { id = scorecard.HoleID });
         }
 
+        
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        public void CalculateAverageScore(int id)
+        {
+            // this probably needs refact;oring :) 
+            var hole = db.hole.Find(id);
+            decimal totalScore = (from item in db.scorecard
+                              where item.HoleID == id
+                              select item.Score).Sum();
+
+            var number = db.scorecard.Where(m => m.HoleID == id).Count();
+            hole.AvgScore = totalScore / number;
+           
+
+            db.SaveChanges();
+
+
+
+
+
         }
     }
 }
