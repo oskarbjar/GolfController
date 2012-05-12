@@ -38,7 +38,7 @@ namespace GolfController.Models
         public bool GreenInRegulation { get; set; }
         public int HoleID { get; set; }
         public string Notes { get; set; }
-
+        
         public Hole hole { get; set; }
     }
 
