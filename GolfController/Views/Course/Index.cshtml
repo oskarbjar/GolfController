@@ -21,6 +21,9 @@
         <th>
          Par
         </th>
+        <th>
+        Total Length
+        </th>
         <th></th>
     </tr>
 
@@ -34,6 +37,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TotalPar)
+        </td>
+           <td>
+            @Html.DisplayFor(modelItem => item.TotalLength)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
