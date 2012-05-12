@@ -1,10 +1,3 @@
-C:\Programming Projects\GolfController\GolfController\bin\GolfController.dll
-C:\Programming Projects\GolfController\GolfController\bin\GolfController.pdb
-C:\Programming Projects\GolfController\GolfController\bin\EntityFramework.dll
-C:\Programming Projects\GolfController\GolfController\bin\EntityFramework.xml
-C:\Programming Projects\GolfController\GolfController\obj\Debug\ResolveAssemblyReference.cache
-C:\Programming Projects\GolfController\GolfController\obj\Debug\GolfController.dll
-C:\Programming Projects\GolfController\GolfController\obj\Debug\GolfController.pdb
 C:\Git\GolfController\GolfController\bin\GolfController.dll
 C:\Git\GolfController\GolfController\bin\GolfController.pdb
 C:\Git\GolfController\GolfController\bin\EntityFramework.dll
@@ -12,3 +5,4 @@ C:\Git\GolfController\GolfController\bin\EntityFramework.xml
 C:\Git\GolfController\GolfController\obj\Debug\ResolveAssemblyReference.cache
 C:\Git\GolfController\GolfController\obj\Debug\GolfController.dll
 C:\Git\GolfController\GolfController\obj\Debug\GolfController.pdb
+C:\Programming Projects\GolfController\GolfController\obj\Debug\ResolveAssemblyReference.cache
