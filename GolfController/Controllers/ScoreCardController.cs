@@ -53,14 +53,16 @@ namespace GolfController.Controllers
         [HttpPost]
         public ActionResult Create(ScoreCard scorecard)
         {
+            // TODO: put in temp message that you need too refresh to see latest avg score 
             if (ModelState.IsValid)
             {
            
                 db.scorecard.Add(scorecard);
                 db.SaveChanges();
+                CalculateAverageScore(scorecard.HoleID); 
                 if (Request.IsAjaxRequest())
                 {
-              
+                
                     return PartialView("_ThanksForFeedback");
                 }
                 return RedirectToAction("Index");  
@@ -89,7 +91,9 @@ namespace GolfController.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(scorecard).State = EntityState.Modified;
+                
                 db.SaveChanges();
+                CalculateAverageScore(scorecard.HoleID); 
                 return RedirectToAction("Index");
             }
             ViewBag.HoleID = new SelectList(db.hole, "ID", "HoleNumber", scorecard.HoleID);
@@ -114,13 +118,49 @@ namespace GolfController.Controllers
             ScoreCard scorecard = db.scorecard.Find(id);
             db.scorecard.Remove(scorecard);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            CalculateAverageScore(scorecard.HoleID);
+            return RedirectToAction("Index", new { id = scorecard.HoleID });
         }
 
+        
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        public void CalculateAverageScore(int id)
+        {                     
+            var hole = db.hole.Find(id);
+            var ifexists = db.scorecard.Any(m => m.HoleID == id);
+
+
+            if (ifexists)
+            {
+                decimal number = db.scorecard.Where(m => m.HoleID == id).Count();
+                var totalScore = (from item in db.scorecard
+                                  where item.HoleID == id
+                                  select item.Score).Sum();
+                hole.AvgScore = totalScore / number;
+                db.SaveChanges();
+
+            }
+            else
+            {
+                hole.AvgScore = 0;
+                db.SaveChanges();
+            
+            }
+                  
+
+           
+
+           
+
+
+
+
+
         }
     }
 }

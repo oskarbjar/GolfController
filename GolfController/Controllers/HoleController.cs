@@ -84,7 +84,8 @@ namespace GolfController.Controllers
             db.SaveChanges();
 
         }
-        
+     
+
         //
         // GET: /Hole/Edit/5
  
