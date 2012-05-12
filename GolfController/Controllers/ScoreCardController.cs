@@ -53,6 +53,7 @@ namespace GolfController.Controllers
         [HttpPost]
         public ActionResult Create(ScoreCard scorecard)
         {
+            // TODO: put in temp message that you need too refresh to see latest avg score 
             if (ModelState.IsValid)
             {
            
@@ -61,7 +62,7 @@ namespace GolfController.Controllers
                 CalculateAverageScore(scorecard.HoleID); 
                 if (Request.IsAjaxRequest())
                 {
-                    CalculateAverageScore(scorecard.HoleID);
+                
                     return PartialView("_ThanksForFeedback");
                 }
                 return RedirectToAction("Index");  
@@ -129,18 +130,32 @@ namespace GolfController.Controllers
         }
 
         public void CalculateAverageScore(int id)
-        {
-            // this probably needs refact;oring :) 
+        {                     
             var hole = db.hole.Find(id);
-            decimal totalScore = (from item in db.scorecard
-                              where item.HoleID == id
-                              select item.Score).Sum();
+            var ifexists = db.scorecard.Any(m => m.HoleID == id);
 
-            var number = db.scorecard.Where(m => m.HoleID == id).Count();
-            hole.AvgScore = totalScore / number;
+
+            if (ifexists)
+            {
+                decimal number = db.scorecard.Where(m => m.HoleID == id).Count();
+                var totalScore = (from item in db.scorecard
+                                  where item.HoleID == id
+                                  select item.Score).Sum();
+                hole.AvgScore = totalScore / number;
+                db.SaveChanges();
+
+            }
+            else
+            {
+                hole.AvgScore = 0;
+                db.SaveChanges();
+            
+            }
+                  
+
            
 
-            db.SaveChanges();
+           
 
 
 
