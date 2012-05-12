@@ -62,8 +62,8 @@ namespace GolfController.Controllers
                 CalculateAverageScore(scorecard.HoleID); 
                 if (Request.IsAjaxRequest())
                 {
-                
                     return PartialView("_ThanksForFeedback");
+                  // return RedirectToAction("Hole", "ViewHoles", new { id = scorecard.hole.CourseID });
                 }
                 return RedirectToAction("Index");  
             }
